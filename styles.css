@@ -128,8 +128,8 @@ body::before {
 
 .step {
   flex: 1;
-  padding: 0.55rem 0.5rem;
-  font-size: 0.78rem;
+  padding: 0.65rem 0.5rem;
+  font-size: 0.82rem;
   font-weight: 500;
   color: var(--muted);
   text-align: center;
@@ -142,7 +142,7 @@ body::before {
 .step:last-child { border-right: none; }
 
 .step.active {
-  color: var(--text);
+  color: #fff;
   background: var(--accent-soft);
 }
 
@@ -163,8 +163,8 @@ body::before {
 /* ─── Main Container ─────────────────────────── */
 .main {
   flex: 1;
-  padding: 1.5rem 1.25rem;
-  max-width: 620px;
+  padding: 1.75rem 1.5rem;
+  max-width: 780px;
   margin: 0 auto;
   width: 100%;
 }
@@ -240,15 +240,16 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  color: var(--text);
 }
 
 .card-rest {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 1rem 1.1rem;
+  padding: 1.2rem 1.4rem;
   display: flex;
-  gap: 1rem;
+  gap: 1.1rem;
   cursor: pointer;
   transition: all 0.25s;
   align-items: center;
@@ -274,11 +275,12 @@ h2 {
 .card-rest:hover::before { opacity: 1; }
 
 .card-rest__media img {
-  width: 72px;
-  height: 72px;
+  width: 86px;
+  height: 86px;
   object-fit: cover;
   border-radius: 12px;
   flex-shrink: 0;
+  background: var(--surface-2);
 }
 
 .card-rest__body {
@@ -288,15 +290,18 @@ h2 {
 
 .card-rest__body strong {
   font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   display: block;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
+  color: var(--text);   /* fuerza blanco, nunca hereda oscuro */
 }
 
 .card-rest__body small {
-  font-size: 0.82rem;
-  color: var(--muted);
+  font-size: 0.84rem;
+  color: #a0a09e;       /* gris más claro que --muted para legibilidad */
+  display: block;
+  margin-bottom: 0.4rem;
 }
 
 .card-rest__arrow {
@@ -312,18 +317,19 @@ h2 {
 
 .tag {
   display: inline-block;
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-size: 0.72rem;
+  background: rgba(255,69,0,0.15);
+  color: #ff7a40;
+  font-size: 0.74rem;
   font-weight: 600;
-  padding: 0.18rem 0.55rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 4px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   margin-right: 0.35rem;
 }
 
 .tag-rating {
-  background: rgba(232,196,106,0.1);
+  background: rgba(232,196,106,0.15);
   color: var(--gold);
 }
 
