@@ -15,15 +15,15 @@
         <img src="./assets/logo-delivery.svg" width="36" height="36" alt="" class="header-logo"/>
         <h1 class="brand-name">Comida<span>Rápida</span></h1>
       </div>
-      <button id="btn-carrito-header" class="btn-faint" style="position:relative;">
-        🛒 Carrito &nbsp;<span id="cart-count-header" class="cart-badge">0</span>
+      <button id="btn-carrito" class="btn-faint" style="position:relative;">
+        🛒 Carrito &nbsp;<span class="cart-badge" id="cart-count-header">0</span>
       </button>
     </div>
 
     <nav class="steps" aria-label="Pasos del pedido">
-      <span class="step active" data-step="1">① Restaurante</span>
-      <span class="step" data-step="2">② Menú</span>
-      <span class="step" data-step="3">③ Pago</span>
+      <span class="step active" data-step-indicator="1">① Restaurante</span>
+      <span class="step" data-step-indicator="2">② Menú</span>
+      <span class="step" data-step-indicator="3">③ Pago</span>
     </nav>
   </header>
 
@@ -72,7 +72,7 @@
       <h2>Tu pedido</h2>
 
       <ul id="lista-resumen" class="lista-resumen"></ul>
-      <p id="resumen-vacio" class="muted" style="text-align:center; padding:2.5rem 0; display:none;">
+      <p id="resumen-vacio" class="muted" style="text-align:center; padding:2.5rem 0;">
         🛒 Tu carrito está vacío
       </p>
 
@@ -116,9 +116,9 @@
 
   </main>
 
-  <!-- Carrito flotante (pill centrado abajo) -->
-  <button id="floating-cart" class="floating-cart">
-    🛒 Ver carrito &nbsp;<span id="cart-count" class="cart-badge">0</span>
+  <!-- Pill flotante visual — delega click al btn-carrito del header -->
+  <button class="floating-cart" onclick="document.getElementById('btn-carrito').click()">
+    🛒 Ver carrito &nbsp;<span class="cart-badge" id="cart-count-float">0</span>
   </button>
 
   <footer class="footer">
@@ -126,5 +126,33 @@
   </footer>
 
   <script src="./script.js"></script>
+  <script>
+    // Sincroniza el contador de ítems en los dos badges visibles
+    (function () {
+      var floatBadge  = document.getElementById('cart-count-float');
+      var headerBadge = document.getElementById('cart-count-header');
+      var count = 0;
+
+      document.getElementById('lista-platos').addEventListener('click', function (e) {
+        if (e.target.closest('[data-add-plato]')) {
+          count++;
+          if (floatBadge)  floatBadge.textContent  = count;
+          if (headerBadge) headerBadge.textContent = count;
+        }
+      });
+
+      // Resetea el contador al confirmar el pedido o al volver a empezar
+      document.getElementById('btn-comprar').addEventListener('click', function () {
+        count = 0;
+        if (floatBadge)  floatBadge.textContent  = 0;
+        if (headerBadge) headerBadge.textContent = 0;
+      });
+      document.getElementById('btn-nuevo').addEventListener('click', function () {
+        count = 0;
+        if (floatBadge)  floatBadge.textContent  = 0;
+        if (headerBadge) headerBadge.textContent = 0;
+      });
+    })();
+  </script>
 </body>
 </html>
