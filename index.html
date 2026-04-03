@@ -3,70 +3,91 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ComidaRápida - Delivery</title>
+  <title>ComidaRápida — Delivery</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+
+  <!-- ── Header ─────────────────────────────────── -->
   <header class="header">
     <div class="header-top">
-      <div style="display:flex; align-items:center; gap:12px;">
-        <img src="./assets/logo-delivery.svg" width="44" height="44" alt="" class="header-logo"/>
-        <h1>ComidaRápida</h1>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <img src="./assets/logo-delivery.svg" width="36" height="36" alt="" class="header-logo"/>
+        <h1 class="brand-name">Comida<span>Rápida</span></h1>
       </div>
-      <button id="btn-carrito-header" class="btn-faint" style="position:relative; padding:8px 14px;">
-        🛒 <span id="cart-count-header" class="cart-badge">0</span>
+      <button id="btn-carrito-header" class="btn-faint" style="position:relative;">
+        🛒 Carrito &nbsp;<span id="cart-count-header" class="cart-badge">0</span>
       </button>
     </div>
 
-    <div class="steps" aria-label="Pasos del pedido">
-      <span class="step active" data-step="1">1. Elige restaurante</span>
-      <span class="step" data-step="2">2. Menú</span>
-      <span class="step" data-step="3">3. Confirmar</span>
-    </div>
+    <nav class="steps" aria-label="Pasos del pedido">
+      <span class="step active" data-step="1">① Restaurante</span>
+      <span class="step" data-step="2">② Menú</span>
+      <span class="step" data-step="3">③ Pago</span>
+    </nav>
   </header>
 
+  <!-- ── Main ───────────────────────────────────── -->
   <main class="main">
 
-    <!-- Paso 1: Restaurantes -->
+    <!-- PASO 1: Restaurantes -->
     <section id="step-restaurante" class="panel active">
-      <h2>¿Dónde quieres pedir hoy?</h2>
-      <p class="muted">Elige tu restaurante favorito</p>
-      
-      <div class="filtros" style="margin:1.5rem 0;">
+      <p class="section-eyebrow">Elige tu lugar</p>
+      <h2>¿Qué se te antoja hoy?</h2>
+      <p class="muted">Selecciona un restaurante y empieza tu pedido</p>
+
+      <div class="filtros" style="margin:1.25rem 0;">
         <select id="filtro-cat">
           <option value="todas">Todas las categorías</option>
-          <option value="pizza">Pizza</option>
-          <option value="asiatica">Asiática</option>
-          <option value="hamburguesas">Hamburguesas</option>
+          <option value="pizza">🍕 Pizza</option>
+          <option value="asiatica">🍜 Asiática</option>
+          <option value="hamburguesas">🍔 Hamburguesas</option>
         </select>
       </div>
-      
+
       <ul id="lista-restaurantes" class="lista-cards"></ul>
     </section>
 
-    <!-- Paso 2: Productos -->
+    <!-- PASO 2: Productos -->
     <section id="step-productos" class="panel" hidden>
-      <button type="button" class="link-back" id="btn-volver-rest" style="margin-bottom:1rem;">
-        ← Volver a restaurantes
+      <button type="button" class="link-back" id="btn-volver-rest">
+        ← Volver
       </button>
-      <h2 id="titulo-restaurante">Menú</h2>
-      <ul id="lista-platos" class="lista-platos"></ul>
-    </section>
 
-    <!-- Paso 3: Resumen + Formulario -->
-    <section id="step-resumen" class="panel" hidden>
-      <h2>Revisa tu pedido</h2>
-      <ul id="lista-resumen" class="lista-resumen"></ul>
-      <p id="resumen-vacio" class="muted" style="text-align:center; padding:2rem 0;">Tu carrito está vacío</p>
-      
-      <div class="total-line">
-        Total: <strong id="total-delivery">0,00 €</strong>
+      <div class="menu-header">
+        <p class="section-eyebrow">Menú del restaurante</p>
+        <h2 id="titulo-restaurante">Menú</h2>
+        <p class="muted">Selecciona lo que quieras — puedes añadir varios platos</p>
       </div>
 
-      <div style="margin-top:2rem;">
-        <h3>Datos de entrega</h3>
+      <ul id="lista-platos" class="lista-platos"></ul>
+
+      <!-- Espacio para que el botón flotante no tape el último ítem -->
+      <div style="height: 90px;"></div>
+    </section>
+
+    <!-- PASO 3: Resumen + Formulario -->
+    <section id="step-resumen" class="panel" hidden>
+      <p class="section-eyebrow">Casi listo</p>
+      <h2>Tu pedido</h2>
+
+      <ul id="lista-resumen" class="lista-resumen"></ul>
+      <p id="resumen-vacio" class="muted" style="text-align:center; padding:2.5rem 0; display:none;">
+        🛒 Tu carrito está vacío
+      </p>
+
+      <!-- Desglose de costos -->
+      <div class="total-block">
+        <div class="total-row"><span>Subtotal</span><span id="subtotal-delivery">0,00 €</span></div>
+        <div class="total-row"><span>Costo de envío</span><span>Gratis 🎉</span></div>
+        <div class="total-final"><span>Total</span><strong id="total-delivery">0,00 €</strong></div>
+      </div>
+
+      <!-- Formulario de entrega -->
+      <div class="form-section">
+        <h3>📍 Datos de entrega</h3>
         <div class="form-group">
-          <label>Dirección de entrega</label>
+          <label>Dirección</label>
           <input type="text" id="direccion" placeholder="Calle, número y colonia" value="Av. Reforma 123, Mexicali">
         </div>
         <div class="form-group">
@@ -79,25 +100,29 @@
         </div>
       </div>
 
-      <button id="btn-comprar" class="btn-primary">Confirmar y pagar pedido</button>
-      <button id="btn-seguir-comprando" class="btn-secondary" style="margin-top:0.75rem;">Seguir añadiendo platos</button>
+      <button id="btn-comprar" class="btn-primary">Confirmar y pagar 🔒</button>
+      <button id="btn-seguir-comprando" class="btn-secondary">← Seguir añadiendo platos</button>
     </section>
 
-    <!-- Confirmación final -->
+    <!-- CONFIRMACIÓN -->
     <section id="step-confirmacion" class="panel panel-center" hidden>
-      <h2 style="color:var(--success);">¡Pedido confirmado! 🎉</h2>
-      <p id="msg-confirm" style="font-size:1.1rem; margin:1.5rem 0;"></p>
-      <button id="btn-nuevo" class="btn-primary">Hacer otro pedido</button>
+      <span class="confirm-icon">🎉</span>
+      <h2>¡Pedido confirmado!</h2>
+      <p id="msg-confirm">Tu pedido está en camino. Prepárate para disfrutar.</p>
+      <button id="btn-nuevo" class="btn-primary" style="max-width:260px; margin:0 auto;">
+        Hacer otro pedido
+      </button>
     </section>
+
   </main>
 
-  <!-- Carrito flotante -->
+  <!-- Carrito flotante (pill centrado abajo) -->
   <button id="floating-cart" class="floating-cart">
-    🛒 <span id="cart-count" class="cart-badge">0</span>
+    🛒 Ver carrito &nbsp;<span id="cart-count" class="cart-badge">0</span>
   </button>
 
   <footer class="footer">
-    <small>ComidaRápida © 2026 - Prototipo de delivery</small>
+    <small>ComidaRápida © 2026 — Prototipo de delivery · Mexicali, B.C.</small>
   </footer>
 
   <script src="./script.js"></script>
